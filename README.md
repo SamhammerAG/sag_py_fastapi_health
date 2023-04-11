@@ -69,6 +69,10 @@ class TestCheck(Check):
 The description contains something like "Directory ... was accessable" or "Service is running" if everything is ok.
 If there was an error, you can add the error message/exception message there.
 
+## How to configure in prtg
+
+use the sensor "HTTP data advanced" (https://www.paessler.com/manuals/prtg/http_data_advanced_sensor) and configure to your prtg health endpoint (like in the example above ([URL_TO_YOUR_SERVICE]/health/health-prtg)
+
 ## How to publish
 * Update the version in setup.py and commit your change
 * Create a tag with the same version number
