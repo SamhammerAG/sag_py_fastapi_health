@@ -1,6 +1,6 @@
 import asyncio
 import datetime
-from typing import Any, Coroutine, List, Literal
+from typing import Any, Coroutine, List, Literal, cast
 
 from fastapi import APIRouter, Response
 
@@ -27,7 +27,7 @@ class HealthcheckRouter(APIRouter):
 
     async def _handle_request(self, probe: Probe) -> Response:
         tasks: List[Coroutine[Any, Any, CheckResult]] = [self._run_check(check) for check in probe.checks]
-        results: List[CheckResult] = await asyncio.gather(*tasks)
+        results: List[CheckResult] = cast(List[CheckResult], await asyncio.gather(*tasks))
 
         total_duration: float = sum(result.duration for result in results)
         status: Literal["Unhealthy", "Degraded", "Healthy"] = self._get_total_status(results)
