@@ -11,12 +11,6 @@ except ImportError as exc:
 
 
 class HttpCheck(Check):
-    _url: str
-    _username: Optional[str]
-    _password: Optional[str]
-    _verify_ssl: bool
-    _timeout: float
-    _name: str
 
     def __init__(
         self,
@@ -27,12 +21,12 @@ class HttpCheck(Check):
         timeout: float = 60.0,
         name: str = "HTTP",
     ) -> None:
-        self._url = url
-        self._username = username
-        self._password = password
-        self._verify_ssl = verify_ssl
-        self._timeout = timeout
-        self._name = name
+        self._url: str = url
+        self._username: Optional[str] = username
+        self._password: Optional[str] = password
+        self._verify_ssl: bool = verify_ssl
+        self._timeout: float = timeout
+        self._name: str = name
 
     async def __call__(self) -> CheckResult:
         try:

@@ -21,10 +21,10 @@ def test__prtg_response_formatter__healthy() -> None:
         CheckResult(name="checkOne", status="Healthy", duration=50, description="Check ok"),
         CheckResult(name="checkTwo", status="Healthy", duration=50, description="Check ok"),
     ]
-    health_chekck_report = HealthcheckReport(status="Healthy", total_duration=100, entries=check_results)
+    health_check_report = HealthcheckReport(status="Healthy", total_duration=100, entries=check_results)
 
     # Act
-    actual: Response = PrtgResponseFormatter().format(health_chekck_report)
+    actual: Response = PrtgResponseFormatter().format(health_check_report)
 
     # Assert
     assert actual.status_code == 200
@@ -40,10 +40,10 @@ def test__prtg_response_formatter__unhealthy() -> None:
         CheckResult(name="checkOne", status="Unhealthy", duration=50, description="Something failed"),
         CheckResult(name="checkTwo", status="Healthy", duration=50, description="Check ok"),
     ]
-    health_chekck_report = HealthcheckReport(status="Unhealthy", total_duration=100, entries=check_results)
+    health_check_report = HealthcheckReport(status="Unhealthy", total_duration=100, entries=check_results)
 
     # Act
-    actual: Response = PrtgResponseFormatter().format(health_chekck_report)
+    actual: Response = PrtgResponseFormatter().format(health_check_report)
 
     # Assert
     assert actual.status_code == 200
