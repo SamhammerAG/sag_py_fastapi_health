@@ -29,8 +29,9 @@ def test__prtg_response_formatter__healthy() -> None:
     # Assert
     assert actual.status_code == 200
     assert (
-        actual.body
-        == b'{"prtg":{"error":0,"text":"","result":[{"value":100.0,"channel":"TotalDuration","float":true,"unit":"TimeResponse"},{"value":50.0,"channel":"checkOne.Duration","float":true,"unit":"TimeResponse"},{"value":50.0,"channel":"checkTwo.Duration","float":true,"unit":"TimeResponse"}]}}'
+        actual.body == b'{"prtg":{"error":0,"text":"","result":[{"value":100.0,"channel":"TotalDuration","float":true,'
+        b'"unit":"TimeResponse"},{"value":50.0,"channel":"checkOne.Duration","float":true,"unit":"TimeResponse"},'
+        b'{"value":50.0,"channel":"checkTwo.Duration","float":true,"unit":"TimeResponse"}]}}'
     )
 
 
@@ -49,5 +50,7 @@ def test__prtg_response_formatter__unhealthy() -> None:
     assert actual.status_code == 200
     assert (
         actual.body
-        == b'{"prtg":{"error":1,"text":"checkOne: Something failed","result":[{"value":100.0,"channel":"TotalDuration","float":true,"unit":"TimeResponse"},{"value":50.0,"channel":"checkOne.Duration","float":true,"unit":"TimeResponse"},{"value":50.0,"channel":"checkTwo.Duration","float":true,"unit":"TimeResponse"}]}}'
+        == b'{"prtg":{"error":1,"text":"checkOne: Something failed","result":[{"value":100.0,"channel":"TotalDuration"'
+        b',"float":true,"unit":"TimeResponse"},{"value":50.0,"channel":"checkOne.Duration","float":true,'
+        b'"unit":"TimeResponse"},{"value":50.0,"channel":"checkTwo.Duration","float":true,"unit":"TimeResponse"}]}}'
     )

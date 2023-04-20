@@ -23,7 +23,7 @@ async def test__HttpCheck__with_ok_result(monkeypatch: pytest.MonkeyPatch) -> No
         session=mock.Mock(),
     )
     response.status = 200
-    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)  # type: ignore
+    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
 
     # Act
     check: CheckResult = await HttpCheck("http://localhost/test", name="myHttpCheck")()
@@ -49,7 +49,7 @@ async def test__HttpCheck__with_no_content_result(monkeypatch: pytest.MonkeyPatc
         session=mock.Mock(),
     )
     response.status = 204
-    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)  # type: ignore
+    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
 
     # Act
     check: CheckResult = await HttpCheck("http://localhost/test", name="myHttpCheck")()
@@ -75,7 +75,7 @@ async def test__HttpCheck__with_error_result(monkeypatch: pytest.MonkeyPatch) ->
         session=mock.Mock(),
     )
     response.status = 500
-    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)  # type: ignore
+    monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
 
     # Act
     check: CheckResult = await HttpCheck("http://localhost/test", name="myHttpCheck")()

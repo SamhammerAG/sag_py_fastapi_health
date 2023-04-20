@@ -1,8 +1,8 @@
 import re
 from abc import ABC, abstractmethod
 from typing import Iterable, List, Literal, NamedTuple, Optional, Type
-from fastapi import Response
 
+from fastapi import Response
 from pydantic import BaseModel
 
 

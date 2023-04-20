@@ -29,7 +29,7 @@ async def test__StorageExistsCheck__error_on_empty() -> None:
 @pytest.mark.asyncio
 async def test__StorageExistsCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.path.isdir", lambda path: True)  # type: ignore
+    monkeypatch.setattr("os.path.isdir", lambda path: True)
 
     # Act
     check: CheckResult = await StorageExistsCheck("/existing/path", "myStorageCheck", True)()
@@ -43,7 +43,7 @@ async def test__StorageExistsCheck__path_exists(monkeypatch: pytest.MonkeyPatch)
 @pytest.mark.asyncio
 async def test__StorageExistsCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.path.isdir", lambda path: False)  # type: ignore
+    monkeypatch.setattr("os.path.isdir", lambda path: False)
 
     # Act
     check: CheckResult = await StorageExistsCheck("/existing/path", "myStorageCheck", True)()
@@ -79,7 +79,7 @@ async def test__StorageReadableCheck__error_on_empty() -> None:
 @pytest.mark.asyncio
 async def test__StorageReadableCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.access", lambda path, mode: True)  # type: ignore
+    monkeypatch.setattr("os.access", lambda path, mode: True)
 
     # Act
     check: CheckResult = await StorageReadableCheck("/existing/path", "myStorageCheck", True)()
@@ -93,7 +93,7 @@ async def test__StorageReadableCheck__path_exists(monkeypatch: pytest.MonkeyPatc
 @pytest.mark.asyncio
 async def test__StorageReadableCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.access", lambda path, mode: False)  # type: ignore
+    monkeypatch.setattr("os.access", lambda path, mode: False)
 
     # Act
     check: CheckResult = await StorageReadableCheck("/existing/path", "myStorageCheck", True)()
@@ -129,7 +129,7 @@ async def test__StorageWritableCheck__error_on_empty() -> None:
 @pytest.mark.asyncio
 async def test__StorageWritableCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.access", lambda path, mode: True)  # type: ignore
+    monkeypatch.setattr("os.access", lambda path, mode: True)
 
     # Act
     check: CheckResult = await StorageWritableCheck("/existing/path", "myStorageCheck", True)()
@@ -143,7 +143,7 @@ async def test__StorageWritableCheck__path_exists(monkeypatch: pytest.MonkeyPatc
 @pytest.mark.asyncio
 async def test__StorageWritableCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
-    monkeypatch.setattr("os.access", lambda path, mode: False)  # type: ignore
+    monkeypatch.setattr("os.access", lambda path, mode: False)
 
     # Act
     check: CheckResult = await StorageWritableCheck("/existing/path", "myStorageCheck", True)()

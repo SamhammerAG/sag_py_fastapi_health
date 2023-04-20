@@ -1,10 +1,12 @@
-from typing import Type, List
+from typing import List, Type
+
+from fastapi import Response
 from fastapi import status as http_status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from sag_py_fastapi_health.models import HealthResponseFormatter, HealthcheckReport, Response
+from sag_py_fastapi_health.models import HealthcheckReport, HealthResponseFormatter
 
 
 class DefaultResponseFormatter(HealthResponseFormatter):
