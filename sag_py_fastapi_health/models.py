@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 class CheckResult(BaseModel):
     name: str
-    status: Literal["Healthy", "Unhealthy", "Degraded"]
+    status: Literal["Healthy", "Unhealthy", "Degraded"] = "Unhealthy"
     duration: float = 0
     description: Optional[str] = None
 
@@ -20,7 +20,7 @@ class Check(ABC):
 
 
 class HealthcheckReport(BaseModel):
-    status: Literal["Healthy", "Unhealthy", "Degraded"]
+    status: Literal["Healthy", "Unhealthy", "Degraded"] = "Unhealthy"
     total_duration: float
     entries: List[CheckResult]
 
