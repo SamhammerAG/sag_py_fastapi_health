@@ -1,14 +1,15 @@
 import re
 from abc import ABC, abstractmethod
-from typing import Iterable, List, Literal, NamedTuple, Optional, Type
+from typing import Iterable, List, NamedTuple, Optional, Type
 
 from fastapi import Response
 from pydantic import BaseModel
+from typing_extensions import Literal
 
 
 class CheckResult(BaseModel):
     name: str
-    status: Literal["Healthy", "Unhealthy", "Degraded"] = "Unhealthy"
+    status: Literal["Healthy", "Unhealthy", "Degraded"]
     duration: float = 0
     description: Optional[str] = None
 
@@ -20,7 +21,7 @@ class Check(ABC):
 
 
 class HealthcheckReport(BaseModel):
-    status: Literal["Healthy", "Unhealthy", "Degraded"] = "Unhealthy"
+    status: Literal["Healthy", "Unhealthy", "Degraded"]
     total_duration: float
     entries: List[CheckResult]
 
