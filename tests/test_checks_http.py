@@ -1,3 +1,4 @@
+# type: ignore
 import mock
 import pytest
 from aiohttp import ClientResponse
