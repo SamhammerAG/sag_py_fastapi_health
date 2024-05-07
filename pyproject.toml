@@ -8,9 +8,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-fastapi = "*"
+fastapi = ">=0.109.1"
 pydantic = "*"
-aiohttp = { version = ">=3,<4", extras = ["speedups"] }
+aiohttp = { version = ">=3.9.4,<4", extras = ["speedups"] }
 typing-extensions = "*"
 
 [tool.poetry.group.dev.dependencies]
