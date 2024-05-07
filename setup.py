@@ -11,7 +11,7 @@ with open("requirements-dev.txt", "r") as fin:
 
 setuptools.setup(
     name="sag-py-fastapi-health",
-    version="0.1.3",
+    version="0.1.4",
     description="A library for fastapi health checks",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
