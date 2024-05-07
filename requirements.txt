@@ -1,4 +1,4 @@
 fastapi>=0.109.1
 pydantic>=1.9
-aiohttp[speedups]>=3,<4
+aiohttp[speedups]>=3.9.4,<4
 typing-extensions>=4.0.0
