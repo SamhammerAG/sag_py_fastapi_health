@@ -1,3 +1,4 @@
+# type: ignore
 import mock
 import pytest
 from aiohttp import ClientResponse
@@ -15,7 +16,7 @@ async def test__HttpCheck__with_ok_result(monkeypatch: pytest.MonkeyPatch) -> No
         "get",
         URL("http://localhost/test"),
         request_info=mock.Mock(),
-        writer=mock.Mock(),
+        writer=None,  # type: ignore [arg-type]
         continue100=None,
         timer=TimerNoop(),
         traces=[],
@@ -41,7 +42,7 @@ async def test__HttpCheck__with_no_content_result(monkeypatch: pytest.MonkeyPatc
         "get",
         URL("http://localhost/test"),
         request_info=mock.Mock(),
-        writer=mock.Mock(),
+        writer=None,  # type: ignore [arg-type]
         continue100=None,
         timer=TimerNoop(),
         traces=[],
