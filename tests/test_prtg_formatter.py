@@ -1,5 +1,3 @@
-from typing import List, Type
-
 from fastapi import Response
 from pydantic import BaseModel
 
@@ -9,7 +7,7 @@ from sag_py_fastapi_health.models import CheckResult, HealthcheckReport
 
 def test__prtg_response_formatter__response_type() -> None:
     # Act
-    actual: Type[BaseModel] = PrtgResponseFormatter().get_response_type()
+    actual: type[BaseModel] = PrtgResponseFormatter().get_response_type()
 
     # Assert
     assert actual == PrtgReport
@@ -17,7 +15,7 @@ def test__prtg_response_formatter__response_type() -> None:
 
 def test__prtg_response_formatter__healthy() -> None:
     # Arrange
-    check_results: List[CheckResult] = [
+    check_results: list[CheckResult] = [
         CheckResult(name="checkOne", status="Healthy", duration=50, description="Check ok"),
         CheckResult(name="checkTwo", status="Healthy", duration=50, description="Check ok"),
     ]
@@ -37,7 +35,7 @@ def test__prtg_response_formatter__healthy() -> None:
 
 def test__prtg_response_formatter__unhealthy() -> None:
     # Arrange
-    check_results: List[CheckResult] = [
+    check_results: list[CheckResult] = [
         CheckResult(name="checkOne", status="Unhealthy", duration=50, description="Something failed"),
         CheckResult(name="checkTwo", status="Healthy", duration=50, description="Check ok"),
     ]

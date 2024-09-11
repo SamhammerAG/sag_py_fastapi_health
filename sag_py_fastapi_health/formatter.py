@@ -1,5 +1,3 @@
-from typing import List, Type
-
 from fastapi import Response
 from fastapi import status as http_status
 from fastapi.encoders import jsonable_encoder
@@ -10,15 +8,15 @@ from sag_py_fastapi_health.models import HealthcheckReport, HealthResponseFormat
 
 
 class DefaultResponseFormatter(HealthResponseFormatter):
-    def get_response_type(self) -> Type[BaseModel]:
+    def get_response_type(self) -> type[BaseModel]:
         return HealthcheckReport
 
     def format(self, report: HealthcheckReport) -> Response:
         return JSONResponse(
             content=jsonable_encoder(report),
-            status_code=http_status.HTTP_200_OK
-            if report.status == "Healthy"
-            else http_status.HTTP_503_SERVICE_UNAVAILABLE,
+            status_code=(
+                http_status.HTTP_200_OK if report.status == "Healthy" else http_status.HTTP_503_SERVICE_UNAVAILABLE
+            ),
         )
 
 
@@ -32,7 +30,7 @@ class PrtgResult(BaseModel):
 class PrtgResponse(BaseModel):
     error: int = Field(default=0)
     text: str = Field(default="Everything is fine :)")
-    result: List[PrtgResult] = Field(default=[])
+    result: list[PrtgResult] = Field(default=[])
 
 
 class PrtgReport(BaseModel):
@@ -40,7 +38,7 @@ class PrtgReport(BaseModel):
 
 
 class PrtgResponseFormatter(HealthResponseFormatter):
-    def get_response_type(self) -> Type[BaseModel]:
+    def get_response_type(self) -> type[BaseModel]:
         return PrtgReport
 
     def format(self, report: HealthcheckReport) -> Response:
