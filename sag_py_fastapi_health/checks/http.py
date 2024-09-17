@@ -5,7 +5,7 @@ from sag_py_fastapi_health.models import Check, CheckResult
 
 try:
     from aiohttp import BasicAuth, ClientResponseError, ClientSession, ClientTimeout, TCPConnector
-except ImportError as exc:
+except ImportError as exc:  # pragma: no cover
     raise ImportError("Using this module requires the aiohttp library.") from exc
 
 

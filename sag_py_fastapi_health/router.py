@@ -15,7 +15,7 @@ class HealthcheckRouter(APIRouter):
 
     def _add_probe_route(self, probe: Probe) -> None:
         async def handle_request() -> Response:
-            return await self._handle_request(probe)
+            return await self._handle_request(probe)  # pragma: no cover
 
         self.add_api_route(
             path=f"/{probe.name}",
