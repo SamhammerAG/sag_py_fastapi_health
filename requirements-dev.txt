@@ -13,3 +13,4 @@ toml
 coverage==6.5.0
 mock
 types-mock
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
