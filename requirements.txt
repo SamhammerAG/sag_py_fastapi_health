@@ -3,3 +3,4 @@ pydantic>=1.9
 aiohttp[speedups]>=3.9.4,<4
 typing-extensions>=4.0.0
 zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
+

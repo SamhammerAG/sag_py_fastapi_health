@@ -1,6 +1,6 @@
 import asyncio
 import datetime
-from typing import Any, Coroutine, List, Literal, cast
+from typing import Any, Coroutine, Literal, cast
 
 from fastapi import APIRouter, Response
 
@@ -15,7 +15,7 @@ class HealthcheckRouter(APIRouter):
 
     def _add_probe_route(self, probe: Probe) -> None:
         async def handle_request() -> Response:
-            return await self._handle_request(probe)
+            return await self._handle_request(probe)  # pragma: no cover
 
         self.add_api_route(
             path=f"/{probe.name}",
@@ -26,8 +26,8 @@ class HealthcheckRouter(APIRouter):
         )
 
     async def _handle_request(self, probe: Probe) -> Response:
-        tasks: List[Coroutine[Any, Any, CheckResult]] = [self._run_check(check) for check in probe.checks]
-        results: List[CheckResult] = cast(List[CheckResult], await asyncio.gather(*tasks))
+        tasks: list[Coroutine[Any, Any, CheckResult]] = [self._run_check(check) for check in probe.checks]
+        results: list[CheckResult] = cast(list[CheckResult], await asyncio.gather(*tasks))
 
         total_duration: float = sum(result.duration for result in results)
         status: Literal["Unhealthy", "Degraded", "Healthy"] = self._get_total_status(results)
@@ -42,7 +42,7 @@ class HealthcheckRouter(APIRouter):
         check_result.duration = int(elapsed.total_seconds() * 1000)
         return check_result
 
-    def _get_total_status(self, results: List[CheckResult]) -> Literal["Unhealthy", "Degraded", "Healthy"]:
+    def _get_total_status(self, results: list[CheckResult]) -> Literal["Unhealthy", "Degraded", "Healthy"]:
         status: Literal["Unhealthy", "Degraded", "Healthy"] = "Healthy"
         if any(result.status == "Unhealthy" for result in results):
             status = "Unhealthy"

@@ -1,34 +1,32 @@
 import re
 from abc import ABC, abstractmethod
-from typing import Iterable, List, NamedTuple, Optional, Type
+from typing import Iterable, Literal, NamedTuple
 
 from fastapi import Response
 from pydantic import BaseModel
-from typing_extensions import Literal
 
 
 class CheckResult(BaseModel):
     name: str
     status: Literal["Healthy", "Unhealthy", "Degraded"]
     duration: float = 0
-    description: Optional[str] = None
+    description: str | None = None
 
 
 class Check(ABC):
     @abstractmethod
-    async def __call__(self) -> CheckResult:
-        ...  # pragma: no cover
+    async def __call__(self) -> CheckResult: ...  # pragma: no cover
 
 
 class HealthcheckReport(BaseModel):
     status: Literal["Healthy", "Unhealthy", "Degraded"]
     total_duration: float
-    entries: List[CheckResult]
+    entries: list[CheckResult]
 
 
 class HealthResponseFormatter:
     @abstractmethod
-    def get_response_type(self) -> Type[BaseModel]:
+    def get_response_type(self) -> type[BaseModel]:
         pass  # pragma: no cover
 
     @abstractmethod
@@ -40,7 +38,7 @@ class Probe(NamedTuple):
     name: str
     checks: Iterable[Check]
     response_formatter: HealthResponseFormatter
-    summary: Optional[str] = None
+    summary: str | None = None
     include_in_schema: bool = True
 
     @property

@@ -1,12 +1,11 @@
 from http import HTTPStatus
 from traceback import format_exc
-from typing import Optional
 
 from sag_py_fastapi_health.models import Check, CheckResult
 
 try:
     from aiohttp import BasicAuth, ClientResponseError, ClientSession, ClientTimeout, TCPConnector
-except ImportError as exc:
+except ImportError as exc:  # pragma: no cover
     raise ImportError("Using this module requires the aiohttp library.") from exc
 
 
@@ -15,15 +14,15 @@ class HttpCheck(Check):
     def __init__(
         self,
         url: str,
-        username: Optional[str] = None,
-        password: Optional[str] = None,
+        username: str | None = None,
+        password: str | None = None,
         verify_ssl: bool = True,
         timeout: float = 60.0,
         name: str = "HTTP",
     ) -> None:
         self._url: str = url
-        self._username: Optional[str] = username
-        self._password: Optional[str] = password
+        self._username: str | None = username
+        self._password: str | None = password
         self._verify_ssl: bool = verify_ssl
         self._timeout: float = timeout
         self._name: str = name

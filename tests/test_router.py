@@ -1,5 +1,5 @@
 import json
-from typing import Any, List, Literal, cast
+from typing import Any, Literal, cast
 
 import pytest
 from fastapi import Response
@@ -56,7 +56,7 @@ class TestCheck(Check):
 @pytest.mark.asyncio
 async def test__handle_request() -> None:
     # Arrange
-    checks: List[Check] = [TestCheck("checkOne"), TestCheck("checkTwo")]
+    checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo")]
     probe_one = Probe(name="probe1", checks=checks, summary="A summary", response_formatter=DefaultResponseFormatter())
     router = HealthcheckRouter(probe_one)
 
@@ -81,7 +81,7 @@ async def test__handle_request() -> None:
 @pytest.mark.asyncio
 async def test__handle_request__with_failing_check() -> None:
     # Arrange
-    checks: List[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_healthy=False)]
+    checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_healthy=False)]
     probe_one = Probe(name="probe1", checks=checks, summary="A summary", response_formatter=DefaultResponseFormatter())
     router = HealthcheckRouter(probe_one)
 
@@ -106,7 +106,7 @@ async def test__handle_request__with_failing_check() -> None:
 @pytest.mark.asyncio
 async def test__handle_request__with_degraded_check() -> None:
     # Arrange
-    checks: List[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_degraded=True)]
+    checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_degraded=True)]
     probe_one = Probe(name="probe1", checks=checks, summary="A summary", response_formatter=DefaultResponseFormatter())
     router = HealthcheckRouter(probe_one)
 
