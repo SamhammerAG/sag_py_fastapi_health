@@ -4,7 +4,7 @@ from sag_py_fastapi_health.checks.storage import StorageExistsCheck, StorageRead
 from sag_py_fastapi_health.models import CheckResult
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageExistsCheck__ignore_unconfigured() -> None:
     # Act
     check: CheckResult = await StorageExistsCheck("", "myStorageCheck", True)()
@@ -15,7 +15,7 @@ async def test__StorageExistsCheck__ignore_unconfigured() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageExistsCheck__error_on_empty() -> None:
     # Act
     check: CheckResult = await StorageExistsCheck("", "myStorageCheck", False)()
@@ -26,7 +26,7 @@ async def test__StorageExistsCheck__error_on_empty() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageExistsCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.path.isdir", lambda path: True)
@@ -40,7 +40,7 @@ async def test__StorageExistsCheck__path_exists(monkeypatch: pytest.MonkeyPatch)
     assert check.description == "Path exists"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageExistsCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.path.isdir", lambda path: False)
@@ -54,7 +54,7 @@ async def test__StorageExistsCheck__path_not_exists(monkeypatch: pytest.MonkeyPa
     assert check.description == "Path '/existing/path' does not exist or isn't a directory"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageReadableCheck__ignore_unconfigured() -> None:
     # Act
     check: CheckResult = await StorageReadableCheck("", "myStorageCheck", True)()
@@ -65,7 +65,7 @@ async def test__StorageReadableCheck__ignore_unconfigured() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageReadableCheck__error_on_empty() -> None:
     # Act
     check: CheckResult = await StorageReadableCheck("", "myStorageCheck", False)()
@@ -76,7 +76,7 @@ async def test__StorageReadableCheck__error_on_empty() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageReadableCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.access", lambda path, mode: True)
@@ -90,7 +90,7 @@ async def test__StorageReadableCheck__path_exists(monkeypatch: pytest.MonkeyPatc
     assert check.description == "Path readable"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageReadableCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.access", lambda path, mode: False)
@@ -104,7 +104,7 @@ async def test__StorageReadableCheck__path_not_exists(monkeypatch: pytest.Monkey
     assert check.description == "Path '/existing/path' not readable"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageWritableCheck__ignore_unconfigured() -> None:
     # Act
     check: CheckResult = await StorageWritableCheck("", "myStorageCheck", True)()
@@ -115,7 +115,7 @@ async def test__StorageWritableCheck__ignore_unconfigured() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageWritableCheck__error_on_empty() -> None:
     # Act
     check: CheckResult = await StorageWritableCheck("", "myStorageCheck", False)()
@@ -126,7 +126,7 @@ async def test__StorageWritableCheck__error_on_empty() -> None:
     assert check.description == "Empty path"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageWritableCheck__path_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.access", lambda path, mode: True)
@@ -140,7 +140,7 @@ async def test__StorageWritableCheck__path_exists(monkeypatch: pytest.MonkeyPatc
     assert check.description == "Path writable"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__StorageWritableCheck__path_not_exists(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     monkeypatch.setattr("os.access", lambda path, mode: False)
