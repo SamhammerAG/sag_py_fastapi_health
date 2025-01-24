@@ -9,7 +9,7 @@ from sag_py_fastapi_health.checks.http import HttpCheck
 from sag_py_fastapi_health.models import CheckResult
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__HttpCheck__with_ok_result(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     response = ClientResponse(
@@ -35,7 +35,7 @@ async def test__HttpCheck__with_ok_result(monkeypatch: pytest.MonkeyPatch) -> No
     assert check.description == "Got status 200"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__HttpCheck__with_no_content_result(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     response = ClientResponse(
@@ -61,7 +61,7 @@ async def test__HttpCheck__with_no_content_result(monkeypatch: pytest.MonkeyPatc
     assert check.description == "Got status 204"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__HttpCheck__with_error_result(monkeypatch: pytest.MonkeyPatch) -> None:
     # Arrange
     response = ClientResponse(

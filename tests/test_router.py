@@ -53,7 +53,7 @@ class TestCheck(Check):
         )
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__handle_request() -> None:
     # Arrange
     checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo")]
@@ -78,7 +78,7 @@ async def test__handle_request() -> None:
     assert second_result["description"] == "Check was running"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__handle_request__with_failing_check() -> None:
     # Arrange
     checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_healthy=False)]
@@ -103,7 +103,7 @@ async def test__handle_request__with_failing_check() -> None:
     assert second_result["description"] == "Check was running"
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio(loop_scope="function")
 async def test__handle_request__with_degraded_check() -> None:
     # Arrange
     checks: list[Check] = [TestCheck("checkOne"), TestCheck("checkTwo", is_degraded=True)]
