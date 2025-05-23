@@ -24,7 +24,7 @@ pytest-asyncio = "*"
 pytest-cov = "*"
 toml = "*"
 types-mock = "*"
-zipp = ">=3.19.1"
+zipp = ">=3.21.0"
 
 [build-system]
 requires = ["setuptools>=61.0"]
