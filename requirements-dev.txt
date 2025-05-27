@@ -13,3 +13,5 @@ toml
 coverage
 mock
 types-mock
+
+zipp>=3.21.0 # only a vulnerability fix: introduced through pydantic (we don't need this package ourselves)
