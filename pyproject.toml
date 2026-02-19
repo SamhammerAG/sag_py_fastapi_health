@@ -11,6 +11,7 @@ python = "^3.12"
 aiohttp = { version = ">=3.9.4", extras = ["speedups"] }
 fastapi = ">=0.109.1"
 pydantic = ">=2.5.3"
+typing-extensions = ">=4.15.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "*"
@@ -24,7 +25,6 @@ pytest-asyncio = "*"
 pytest-cov = "*"
 toml = "*"
 types-mock = "*"
-zipp = ">=3.21.0"
 
 [build-system]
 requires = ["setuptools>=61.0"]
