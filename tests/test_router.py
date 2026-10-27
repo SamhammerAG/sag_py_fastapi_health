@@ -64,7 +64,7 @@ async def test__handle_request() -> None:
     response: Response = await router._handle_request(probe_one)
 
     # Assert
-    result: Any = json.loads(response.body)
+    result: Any = json.loads(bytes(response.body))
     assert result["status"] == "Healthy"
 
     first_result: Any = result["entries"][0]
@@ -89,7 +89,7 @@ async def test__handle_request__with_failing_check() -> None:
     response: Response = await router._handle_request(probe_one)
 
     # Assert
-    result: Any = json.loads(response.body)
+    result: Any = json.loads(bytes(response.body))
     assert result["status"] == "Unhealthy"
 
     first_result: Any = result["entries"][0]
@@ -114,7 +114,7 @@ async def test__handle_request__with_degraded_check() -> None:
     response: Response = await router._handle_request(probe_one)
 
     # Assert
-    result: Any = json.loads(response.body)
+    result: Any = json.loads(bytes(response.body))
     assert result["status"] == "Degraded"
 
     first_result: Any = result["entries"][0]

@@ -22,6 +22,7 @@ async def test__HttpCheck__with_ok_result(monkeypatch: pytest.MonkeyPatch) -> No
         traces=[],
         loop=mock.Mock(),
         session=mock.Mock(),
+        stream_writer=mock.Mock(),
     )
     response.status = 200
     monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
@@ -48,6 +49,7 @@ async def test__HttpCheck__with_no_content_result(monkeypatch: pytest.MonkeyPatc
         traces=[],
         loop=mock.Mock(),
         session=mock.Mock(),
+        stream_writer=mock.Mock(),
     )
     response.status = 204
     monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
@@ -74,6 +76,7 @@ async def test__HttpCheck__with_error_result(monkeypatch: pytest.MonkeyPatch) ->
         traces=[],
         loop=mock.Mock(),
         session=mock.Mock(),
+        stream_writer=mock.Mock(),
     )
     response.status = 500
     monkeypatch.setattr("aiohttp.ClientSession.get", lambda self, url: response)
